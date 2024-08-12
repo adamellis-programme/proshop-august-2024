@@ -21,8 +21,21 @@
                     c - past in code git remote add origin 
 
 
-3 --
-2 --
+3 -- set up server 
+    -- change from common js to es module 
+        -- go to package.json and add a type module value 
+    -- create a server side package .json ** IN THE ROOT **
+    -- install dependencies such as express and nodemon
+    -- clg hello world to test
+    -- as using ES MOULES WE NEED TO ADD .JS ON THE FROM 
+
+
+2 -- install dotenv as a -D 'DEV DEPENDENCY'
+**  ALWAYS RESTART SERVER WHEN DOT ENV VARIABLES ARE CHANGED **
+
+        -- install axios in the frontend
+
+
 2 --
 2 --
 2 --
