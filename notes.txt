@@ -1,0 +1,31 @@
+1 -- create frontend / backend folder structure 
+2 -- get setup for git 
+        -- when we use create react app it creates a git repo folder 
+            in a .git folder within the 'frontend' folder
+        -- within fronted terminal type ls -a to see all folders including the hidden ones
+           we see the .git ** we need to remove this folder **
+           WE REMOVE THIS WITH rm -rf .git
+        -- check it is gone with ls -a 
+        -- lastly take the .gitignore from frontend and place in the root
+        -- git igpnore goes in the root as we have a backend / uploads folder in the ROOT dir
+        -- within the gitignore file 
+            - remove the slash from node_modules
+            - add .env to gitignore
+        -- initilize a git repo ** IN THE ROOT **
+            1 - git init  (ls -a to see the .git in the root)
+            2 - go to gothub and create a new repo
+            3 - copy the code from '…or push an existing repository from the command line'
+            4 - in the terminal type    
+                    a - git add .
+                    b - git commit -m 'comment'
+                    c - past in code git remote add origin 
+
+
+3 --
+2 --
+2 --
+2 --
+2 --
+2 --
+2 --
+2 --
