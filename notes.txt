@@ -30,15 +30,74 @@
     -- as using ES MOULES WE NEED TO ADD .JS ON THE FROM 
 
 
-2 -- install dotenv as a -D 'DEV DEPENDENCY'
+4 -- install dotenv as a -D 'DEV DEPENDENCY'
 **  ALWAYS RESTART SERVER WHEN DOT ENV VARIABLES ARE CHANGED **
 
         -- install axios in the frontend
 
 
-2 --
-2 --
-2 --
-2 --
-2 --
+5 -- install mongoose in the root 
+     -- in backend create config file with file  db.js
+     -- Calling connectDB from server 
+     -- needs to be called in server file as it is at the begining of app
+
+6 -- data seedding -- good for prototyping and testing 
+        -- remove ids from dummy data 
+        -- connect user to product in seed script
+        -- new file in data of users.js
+        -- create script to take products and users and insert into the database
+        -- create a file in backend folder called seeder
+            process.argv
+               -- use indexes to create a command of -d
+               use commands:
+               a - insert 
+               b - clear database out
+                    -- "data:destroy": "node backend/seeder -d"
+
+7 --  postman -- makes the http requests to the backnd while we do not have any frontend to use
+        -- first create a new workspace
+        -- then create an eviroment with enviroment VARIABLES
+        -- make baseURL variable http://localhost:5001/api/ = REST
+        -- in the dropdown make sure we say we want to use the proshop environment 
+            AND CLICK SAVE
+        -- then go to APIS > create new api
+        -- set up requests in a collection 
+            - products, users, collections
+            -- under products ADD NEW REQ (GET, POST, PUT ETC)
+            --- {{baseURL}}/products
+            ---- {{baseURL}}/products/:id
+
+
+8 --  Routes 
+    -- express has a Router we can use to put our
+       routes in seperate files
+            create files in BE
+                - routes.js  
+
+                create async handler before wwe fetch data from database 
+                this is an elegant error handling solution
+
+        - create new folder in backend 'middleware'
+
+
+2 -- error middleware by if call next(err) this will bypass all other middleware and call the next err middleware
+    this basicly SKIPS all other middleware as there will be an error
+
+    asynchronous errors need to have the error middleware 
+    if we do not have any custom error middleware then the 
+    UGLY custom html middleware will be hit
+
+    anything passed to the next('cheese') will be percieved as an error and 
+    we then get back the custom html error
+
+    if next() is empty it will then call the next middlewart the res
+    the default err middleware runs at the end of the stack and sends the html back to  the client 
+
+    err middleware always at the end of the middleware stack
+
+    contact default err middleware by calling next(err) 
+2 -- 
+2 -- 
+2 -- 
+2 -- 
 2 --
