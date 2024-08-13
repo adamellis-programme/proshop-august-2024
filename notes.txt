@@ -19,6 +19,7 @@
                     a - git add .
                     b - git commit -m 'comment'
                     c - past in code git remote add origin 
+                    d - git push origin <----> (normally main or checkout first)
 
 
 3 -- set up server 
