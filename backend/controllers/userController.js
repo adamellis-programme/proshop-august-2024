@@ -1,5 +1,6 @@
 import asyncHandler from '../middleware/asyncHandler.js'
 import User from '../models/userModel.js'
+import jwt from 'jsonwebtoken'
 
 // @desc    Auth user & get token
 // @route   POST /api/users/login
@@ -12,6 +13,22 @@ const authUser = asyncHandler(async (req, res) => {
   // If you don't await, then by using the && operator you are type coercing a Promise to a boolean value, which will be true.
   // we do not have to use a promise as bcrypt already returns a promis
   if (user && (await user.matchPassword(password))) {
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+      expiresIn: '30d',
+    })
+
+    // Set JWT as an HTTP-Only cookie
+    // jwt = name of cookie
+    // token is the value
+    // then we have options
+    // secure true only in production as need https
+    res.cookie('jwt', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV !== 'development', // Use secure cookies in production
+      sameSite: 'strict', // Prevent CSRF attacks
+      maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days in ms
+    })
+
     res.json({
       _id: user._id,
       name: user.name,

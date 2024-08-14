@@ -134,7 +134,11 @@
 
 
 10-- JSON web token
-                --
+                -- install in the backend which will be the root
+                -- make the cookie in server and test with postman  
+                -- we can see the cookie sent in postman 
+                    look in the response headers in POSTMAN to see cookie data 
+
 
 
 10-- 
