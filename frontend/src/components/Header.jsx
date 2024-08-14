@@ -22,8 +22,10 @@ const Header = () => {
               <LinkContainer to="/cart">
                 <Nav.Link>
                   {/*
-                   * only show if items and can not use .length as
-                   * we need to calculate the actual items
+                   * - only show if items and can not use .length as
+                   * - we need to calculate the actual items
+                   * - here cart items is being persisted from
+                   * - local storage
                    */}
                   {cartItems.length > 0 && (
                     <Badge pill bg="success" style={{ marginLeft: '5px' }}>
