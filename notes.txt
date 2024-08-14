@@ -102,10 +102,16 @@
 
 10--  REDUX
             install redux npm install @reduxjs/toolkit react-redux
-10--            - https://redux.js.org/introduction/installation
+11--            - https://redux.js.org/introduction/installation
                 
+                * Using dispatch() allows the use of middleware. If we are making async operations, 
+                * it needs to go through dispatch so that the middleware can intercept and handle 
+                * those actions appropriately. It also allows you to centralize control over state changes.
+                * https://redux.js.org/api/store#dispatchaction
+                * https://redux.js.org/api/store#dispatchaction
 
-10-- 
+
+
 10-- 
 10-- 
 10-- 

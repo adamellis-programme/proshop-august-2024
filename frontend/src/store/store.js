@@ -7,6 +7,7 @@ import { apiSlice } from '../slices/apiSlice'
 // as we are using the api slice [computed property vlaues]
 
 import cartSliceReducer from '../slices/cartSlice'
+import { updateCart } from '../utils/cartUtils'
 
 // as we add reducers check the dev tools to see them appear
 export default configureStore({
