@@ -112,9 +112,31 @@
 
 
 
-10-- 
-10-- 
-10-- 
+12-- PREPARE ALL SKELETON ROUTES IN ONE GO
+            skeleton out all routes that just 
+            return a simple striing 
+            -- create userRoutes.js
+            -- create userController.js
+
+    Test in postman  --  test all routes in postman (get back the string)
+        -- add new collection (folder)
+        -- click make new requset (will open up a req screen)
+
+11-- Set express middleware to handle json
+            -- middleware for parsing body data
+
+                    !!Promise.resolve(false) // true
+                    !!Promise.reject(false) // true
+                    !!Promise.reject(true) // true
+
+            -- If you don't await, then by using the && operator you are type coercing a Promise to a boolean value, which will be true.
+            -- we do not have to use a promise as bcrypt already returns a promis
+
+
+10-- JSON web token
+                --
+
+
 10-- 
 10-- 
 10-- 
