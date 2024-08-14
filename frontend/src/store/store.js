@@ -3,7 +3,8 @@
 // BOILOR PLATE
 import { configureStore } from '@reduxjs/toolkit'
 import { apiSlice } from '../slices/apiSlice'
-
+// we don't have to have a reducer we bring into the store
+// as we are using the api slice [computed property vlaues]
 export default configureStore({
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer,

@@ -12,8 +12,10 @@ import { BASE_URL } from '../constants'
 
 const baseQuery = fetchBaseQuery({ baseUrl: BASE_URL })
 
+// endpoints directly or injected from a seperate file
 export const apiSlice = createApi({
   baseQuery,
   tagTypes: ['Product', 'Order', 'User'],
+  // we are injection endpoints
   endpoints: (builder) => ({}),
 })
