@@ -5,9 +5,14 @@ import { configureStore } from '@reduxjs/toolkit'
 import { apiSlice } from '../slices/apiSlice'
 // we don't have to have a reducer we bring into the store
 // as we are using the api slice [computed property vlaues]
+
+import cartSliceReducer from '../slices/cartSlice'
+
+// as we add reducers check the dev tools to see them appear
 export default configureStore({
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer,
+    cart: cartSliceReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),
