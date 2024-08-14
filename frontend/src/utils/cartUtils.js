@@ -3,8 +3,9 @@ export const addDecimals = (num) => {
   return (Math.round(num * 100) / 100).toFixed(2)
 }
 
-// we are passimg state so we can use it in here
+// Update the prices and save to storage
 export const updateCart = (state) => {
+  // we are passimg state so we can use it in here
   // Calculate the items price
   state.itemsPrice = addDecimals(
     state.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)

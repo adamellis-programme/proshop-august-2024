@@ -35,8 +35,17 @@ const cartSlice = createSlice({
       // all around the site
       return updateCart(state)
     },
+
+    removeFromCart: (state, action) => {
+      // id is in the action payload
+      // Filter out the item to remove from the cart
+      state.cartItems = state.cartItems.filter((x) => x._id !== action.payload)
+
+      // Update the prices and save to storage
+      return updateCart(state)
+    },
   },
 })
-export const { addToCart } = cartSlice.actions
+export const { addToCart, removeFromCart } = cartSlice.actions
 // bring into our store file
 export default cartSlice.reducer

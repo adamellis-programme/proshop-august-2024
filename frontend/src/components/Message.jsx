@@ -1,14 +1,14 @@
 import { Alert } from 'react-bootstrap'
 
-const Message = ({ variant, children }) => {
+const Message = ({ variant = 'info', children }) => {
   // children is what we are wrapping
   //  CHILDREN ARE WHAT IS INBETWEEN THEN <MESSAGAGE> TEXT ETC</MESSAGE/>
   return <Alert variant={variant}>{children}</Alert>
 }
 
-Message.defaultProps = {
-  variant: 'info',
-}
+// Message.defaultProps = {
+//   variant: 'info',
+// }
 
 export default Message
 
