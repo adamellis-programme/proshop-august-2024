@@ -81,7 +81,7 @@
         - create new folder in backend 'middleware'
 
 
-2 -- error middleware by if call next(err) this will bypass all other middleware and call the next err middleware
+9 -- Error middleware by if call next(err) this will bypass all other middleware and call the next err middleware
     this basicly SKIPS all other middleware as there will be an error
 
     asynchronous errors need to have the error middleware 
@@ -97,8 +97,18 @@
     err middleware always at the end of the middleware stack
 
     contact default err middleware by calling next(err) 
-2 -- 
-2 -- 
-2 -- 
-2 -- 
-2 --
+
+
+
+10--  REDUX
+            install redux npm install @reduxjs/toolkit react-redux
+10--            - https://redux.js.org/introduction/installation
+                
+
+10-- 
+10-- 
+10-- 
+10-- 
+10-- 
+10-- 
+10-- 
