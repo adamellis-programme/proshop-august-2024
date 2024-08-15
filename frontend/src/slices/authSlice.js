@@ -17,12 +17,17 @@ const authSlice = createSlice({
       // stringify the usr an pass it in
       localStorage.setItem('userInfo', JSON.stringify(action.payload))
     },
+
+    logout: (state, action) => {
+      state.userInfo = null
+      localStorage.removeItem('userInfo')
+    },
   },
 })
 
-export const { setCredentials } = authSlice.actions
+export const { setCredentials, logout } = authSlice.actions
 
 // add to the store
-// we do not add products and users api to the slice 
-// is they are childs of the api slice 
+// we do not add products and users api to the slice
+// is they are childs of the api slice
 export default authSlice.reducer

@@ -155,10 +155,38 @@
                -- is they are childs of the api slice 
                -- injecting endpoints so this makes it a child
 
-               
+            -- check in console / application / cookies form the cookie
+            -- the HTTP will be checked 
+            -- user in state and local storage 
+
+            bug fix for trusted user
+            https://github.com/bradtraversy/proshop-v2#bug-token-and-cookie-expiration-not-handled-in-frontend
+            https://github.com/bradtraversy/proshop-v2#faq-how-do-i-use-vite-instead-of-cra
+https://blog.logrocket.com/implementing-secure-password-reset-node-js/
+https://expressjs.com/en/api.html
+https://www.youtube.com/watch?v=5yEG6GhoJBs
+
+password also be hashed on the client side?
+ No as any application taking user credentials, should/would be served over https with a valid ssl certificate.
+So as long site is served over https then there is no risk of anyone intercepting and decrypting the communication.
+Hope that answers it for you.
 
 
-15-- 
-15-- 
+
+
+16-- LOGOUT
+        set funcntions in usersApiSlice and authSlice
+        
+
+
+17-- REGISTER USER FRONTEND 
+        1 -- users api slice   register: builder.mutation
+        2 -- dispatch from the front end set credentials     dispatch(setCredentials({ ...res }))
+        3 -- token is sent from the backend and stays in browser until destroyed
+        4 --
+        5 --
+        6 --
+
+
 15-- 
 15-- 

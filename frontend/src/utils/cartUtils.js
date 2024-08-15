@@ -1,4 +1,11 @@
 // helper function
+/**
+ *   - for the user cart to get hiddenn when the user leaves
+ *   - store the care in the database and set to local storage
+ *   - when signing in and then delete local storage when that
+ *   - user signs out but fetch the next users cart on their
+ *   - signin
+ */
 export const addDecimals = (num) => {
   return (Math.round(num * 100) / 100).toFixed(2)
 }
