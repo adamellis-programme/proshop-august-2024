@@ -140,7 +140,9 @@
                     look in the response headers in POSTMAN to see cookie data 
 
 
-
+            -- once we log in the coockie gets sent along with every req 
+            -- create a jwt and set in a cookie
+            -- install a cookie parser middlewart
 10-- 
 10-- 
 10-- 

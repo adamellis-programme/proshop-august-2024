@@ -6,13 +6,16 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 
 import productRoutes from './routes/productRoutes.js'
 import userRoutes from './routes/userRoutes.js'
-
+import cookieParser from 'cookie-parser'
 const app = express()
 const port = process.env.PORT || 5001 // fallback
 
 // body parser middlewart
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+
+// cookie parser m/w - allows access to req.cookies - ours is called jwt so we can access req.cookies.jwt
+app.use(cookieParser())
 
 connectDB() // call at begining of app
 
