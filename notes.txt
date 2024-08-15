@@ -122,7 +122,7 @@
         -- add new collection (folder)
         -- click make new requset (will open up a req screen)
 
-11-- Set express middleware to handle json
+13-- Set express middleware to handle json
             -- middleware for parsing body data
 
                     !!Promise.resolve(false) // true
@@ -133,7 +133,7 @@
             -- we do not have to use a promise as bcrypt already returns a promis
 
 
-10-- JSON web token
+14-- JSON web token
                 -- install in the backend which will be the root
                 -- make the cookie in server and test with postman  
                 -- we can see the cookie sent in postman 
@@ -143,6 +143,22 @@
             -- once we log in the coockie gets sent along with every req 
             -- create a jwt and set in a cookie
             -- install a cookie parser middlewart
-10-- 
-10-- 
-10-- 
+
+15-- FRONT END AUTH
+
+
+            -- authSlice adds a user to local storage 
+                this tells the frontend there is a 
+                vallidated user
+
+               --  we do not add products and users api to the slice 
+               -- is they are childs of the api slice 
+               -- injecting endpoints so this makes it a child
+
+               
+
+
+15-- 
+15-- 
+15-- 
+15-- 

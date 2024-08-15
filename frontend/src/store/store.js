@@ -7,13 +7,14 @@ import { apiSlice } from '../slices/apiSlice'
 // as we are using the api slice [computed property vlaues]
 
 import cartSliceReducer from '../slices/cartSlice'
-import { updateCart } from '../utils/cartUtils'
+import authSliceReducer from '../slices/authSlice' // add this line
 
 // as we add reducers check the dev tools to see them appear
 export default configureStore({
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer,
     cart: cartSliceReducer,
+    auth: authSliceReducer, // add this line
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),
