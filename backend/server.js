@@ -6,7 +6,10 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 
 import productRoutes from './routes/productRoutes.js'
 import userRoutes from './routes/userRoutes.js'
+import orderRoutes from './routes/orderRoutes.js'
+
 import cookieParser from 'cookie-parser'
+
 const app = express()
 const port = process.env.PORT || 5001 // fallback
 
@@ -25,6 +28,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/products', productRoutes)
 app.use('/api/users', userRoutes)
+app.use('/api/orders', orderRoutes);
 
 // make sure under all routes
 app.use(notFound)
