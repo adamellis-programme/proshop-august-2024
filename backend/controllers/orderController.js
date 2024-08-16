@@ -71,6 +71,8 @@ const getOrderById = asyncHandler(async (req, res) => {
    * adds the fields of name / email from user model
    * which we have a reference to in the order model at the top
    * it has the ref and creates name / email fields and uses the data from the user ref in the order schema
+   *
+   * populate automaticly places the id of that user in the 'user' object
    */
   const order = await Order.findById(req.params.id).populate('user', 'name email')
 
