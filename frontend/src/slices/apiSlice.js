@@ -6,7 +6,8 @@
  * tag types are uses to define the types of data we fetch from the api
  *
  */
-
+// ALL OTHER SLICES ARE CHILDREN OF THIS MAIN API SLICE
+// THIS IS DIFFRENT TO A REGULAR SLICE
 import { fetchBaseQuery, createApi } from '@reduxjs/toolkit/query/react'
 import { BASE_URL } from '../constants'
 

@@ -50,8 +50,15 @@ const cartSlice = createSlice({
       // localStorage.setItem('cart', JSON.stringify(state))
       return updateCart(state)
     },
+
+    savePaymentMethod: (state, action) => {
+      state.paymentMethod = action.payload
+      return updateCart(state)
+    },
   },
 })
-export const { addToCart, removeFromCart, saveShippingAddress } = cartSlice.actions
+
+export const { addToCart, removeFromCart, saveShippingAddress, savePaymentMethod } =
+  cartSlice.actions
 // bring into our store file
 export default cartSlice.reducer
