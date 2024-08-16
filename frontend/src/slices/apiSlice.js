@@ -14,9 +14,12 @@ import { BASE_URL } from '../constants'
 const baseQuery = fetchBaseQuery({ baseUrl: BASE_URL })
 
 // endpoints directly or injected from a seperate file
+// this apiSlice is connected to the STORE
 export const apiSlice = createApi({
   baseQuery,
   tagTypes: ['Product', 'Order', 'User'],
-  // we are injection endpoints
+  // we are INJECTION endpoints
+  // instead of writting them here
+  // thats why we bring parent into the children
   endpoints: (builder) => ({}),
 })

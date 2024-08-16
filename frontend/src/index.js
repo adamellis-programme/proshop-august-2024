@@ -24,6 +24,7 @@ import LoginScreen from './screens/LoginScreen'
 import ShippingScreen from './screens/ShippingScreen'
 import PrivateRoute from './components/PrivateRoute'
 import PaymentScreen from './screens/PaymentScreen'
+import PlaceOrderScreen from './screens/PlaceOrderScreen'
 const router = createBrowserRouter(
   createRoutesFromElements(
     // App gets passed here
@@ -32,12 +33,13 @@ const router = createBrowserRouter(
       <Route path="/product/:id" element={<ProductScreen />} />
       <Route path="/cart" element={<CartScreen />} />
       <Route path="/login" element={<LoginScreen />} />
-      <Route path="/register" element={<RegisterScreen />} />;{/*  */}
+      <Route path="/register" element={<RegisterScreen />} />
       {/* private route area */}
       <Route path="" element={<PrivateRoute />}>
         {/* path set to '' ? */}
         <Route path="/shipping" element={<ShippingScreen />} />
-        <Route path="/payment" element={<PaymentScreen />} /> {/* Add this line */}
+        <Route path="/payment" element={<PaymentScreen />} />
+        <Route path="/placeorder" element={<PlaceOrderScreen />} />
       </Route>
     </Route>
   )
