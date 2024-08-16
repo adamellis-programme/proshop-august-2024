@@ -28,7 +28,18 @@ app.get('/', (req, res) => {
 
 app.use('/api/products', productRoutes)
 app.use('/api/users', userRoutes)
-app.use('/api/orders', orderRoutes);
+app.use('/api/orders', orderRoutes)
+
+/**
+ *
+ * paypal can make a request to this route and get the id
+ * kept in server for security reasons
+ * paypal makes req to this route and this route gets it from the env securely
+ *
+ */
+app.get('/api/config/paypal', (req, res) => {
+  res.send({ clientId: process.env.PAYPAL_CLIENT_ID })
+})
 
 // make sure under all routes
 app.use(notFound)
