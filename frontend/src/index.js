@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-
+import { PayPalScriptProvider } from '@paypal/react-paypal-js'
 import App from './App'
 
 import {
@@ -51,8 +51,11 @@ const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
-      {/* <App /> */}
+      <PayPalScriptProvider deferLoading={true}>
+        {/* place app inside this paypal provider */}
+        <RouterProvider router={router} />
+        {/* <App /> */}
+      </PayPalScriptProvider>
     </Provider>
   </React.StrictMode>
 )
