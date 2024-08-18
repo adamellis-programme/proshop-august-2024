@@ -3,7 +3,12 @@ import { Table, Button, Row, Col } from 'react-bootstrap'
 import { FaEdit, FaPlus, FaTrash } from 'react-icons/fa'
 import Message from '../../components/Message'
 import Loader from '../../components/Loader'
-import { useGetProductsQuery } from '../../slices/productsApiSlice'
+import { toast } from 'react-toastify'
+import {
+  useGetProductsQuery,
+  useGetProductDetailsQuery,
+  useCreateProductMutation,
+} from '../../slices/productsApiSlice'
 
 // HAVE TO USE LOADING AS IT SHOWS UNDEFINED LOADS OF TIMES
 // ISLOADING STOPS THE APP CRASHING
@@ -13,6 +18,21 @@ const ProductListScreen = () => {
   const deleteHandler = (id) => {
     console.log('delete', id)
   }
+  // wold normally call createProduct but this is being auto created on the backend
+  const [createProduct, { isLoading: loadingCreate }] = useCreateProductMutation()
+
+  const createProductHandler = async () => {
+    if (window.confirm('Are you sure you want to create a new product?')) {
+      try {
+        // we do not pass anything in as we are creating on the backend
+        await createProduct().unwrap() // NOTE: here we need to unwrap the Promise to catch any rejection in our catch block
+        refetch()
+      } catch (err) {
+        console.log(err)
+        toast.error(err?.data?.message || err.error)
+      }
+    }
+  }
 
   return (
     <>
@@ -21,12 +41,12 @@ const ProductListScreen = () => {
           <h1>Products</h1>
         </Col>
         <Col className="text-end">
-          <Button className="btn-sm m-3">
+          <Button onClick={createProductHandler} className="btn-sm m-3">
             <FaPlus /> Create Product
           </Button>
         </Col>
       </Row>
-
+      {loadingCreate && <Loader />}
       {isLoading ? (
         <Loader />
       ) : error ? (

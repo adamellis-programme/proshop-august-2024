@@ -7,6 +7,8 @@ export const productsApiSlice = apiSlice.injectEndpoints({
       query: () => ({
         url: PRODUCTS_URL,
       }),
+      // ask where do the tags come from
+      providesTags: ['Product'], // may have to refresh the page if not
       keepUnusedDataFor: 5,
     }),
     // Add this endpoint
@@ -15,6 +17,27 @@ export const productsApiSlice = apiSlice.injectEndpoints({
         url: `${PRODUCTS_URL}/${productId}`,
       }),
       keepUnusedDataFor: 5,
+    }),
+
+    // -- create new product
+    createProduct: builder.mutation({
+      query: () => ({
+        url: `${PRODUCTS_URL}`,
+        method: 'POST',
+      }),
+      // makes sure we have fresh data stops caching
+      invalidatesTags: ['Product'],
+    }),
+    //-- update new product as admin
+    updateProduct: builder.mutation({
+      query: (data) => ({
+        url: `${PRODUCTS_URL}/${data._id}`,
+        method: 'PUT',
+        body: data,
+      }),
+      // clear the cache so we get upto date data
+      // we provided the tag on get data and we tell it not to chache here 
+      invalidatesTags: ['Product'],
     }),
   }),
 })
@@ -27,7 +50,12 @@ export const productsApiSlice = apiSlice.injectEndpoints({
  */
 // we export the query so we can use it in the pages like the home screen
 
-export const { useGetProductsQuery, useGetProductDetailsQuery } = productsApiSlice
+export const {
+  useGetProductsQuery,
+  useGetProductDetailsQuery,
+  useCreateProductMutation,
+  useUpdateProductMutation,
+} = productsApiSlice
 /**
  * no fetch request or axios to make req
  * all done through redux toolkit

@@ -194,4 +194,39 @@ Hope that answers it for you.
 
 
 
-15-- 
+19-- CREATE NEW PRODUCT 
+    -- set up routes and controller backend 
+    -- add protect and admin to routes 
+    -- add the builder mutation to the slice in the frontend we do not pass in any data as we are creating 
+    -- invalidate tags so it does not cache and we get fresh data
+
+
+20-- UPDATE PRODUCT 
+        -- create update product controller
+        -- create the builder.mutation in product slice 
+        --
+
+
+    * Usually you would unwrap an AsyncThunk when you need to wait for the resolution of the Promise at component level before you do something, like redirecting a user, or when you need to do something at component level with the resolution of the Promise, like show a message with some information from the Promise returned from your AsyncThunk.
+    * Hope that answers it for you, let me know.
+    * 
+    * 
+    * The mutation returns a Promise so we can await the resolution of that before navigating the user, but here we don't need the error or success payload from the mutation, so we don't need to unwrap it.
+    * 
+    * providesTags allows you to 'tag' the cached data, basically give some information about whatever the data is so you can identify it later.
+    * 
+    * invalidatesTags can then specify which 'tags' you identified with your providesTags should be refreshed and the associated tags data be updated in the cache.
+    * 
+    *
+    * https://redux-toolkit.js.org/rtk-query/overview
+    * https://redux-toolkit.js.org/rtk-query/api/createApi#providestags
+    * https://redux-toolkit.js.org/rtk-query/api/createApi#providestags
+
+    
+21-- UPLOAD IMAGE WITH MULTER
+    -- this is the go to for js and uploading images 
+    -- we can use amazon buckets but here we are using the server
+    -- 
+21--
+21--
+21--
