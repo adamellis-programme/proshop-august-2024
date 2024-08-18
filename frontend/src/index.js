@@ -30,6 +30,7 @@ import ProfileScreen from './screens/ProfileScreen'
 
 import AdminRoute from './components/adminRoute'
 import OrderListScreen from './screens/admin/OrderListScreen'
+import ProductListScreen from './screens/admin/ProductListScreen'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -53,6 +54,7 @@ const router = createBrowserRouter(
       {/* CMD I  auto imoport*/}
       <Route path="" element={<AdminRoute />}>
         <Route path="/admin/orderlist" element={<OrderListScreen />} />
+        <Route path="/admin/productList" element={<ProductListScreen />} />
       </Route>
     </Route>
   )
