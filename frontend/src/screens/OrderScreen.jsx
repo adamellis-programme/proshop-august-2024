@@ -20,6 +20,7 @@ const OrderScreen = () => {
    * from slice name payOrder what we like
    * isLoading re named as we have one
    */
+  // update (PUT) the order - USED ON APROVE
   const [payOrder, { isLoading: loadingPay }] = usePayOrderMutation()
 
   /**
@@ -68,6 +69,61 @@ const OrderScreen = () => {
     }
   }, [errorPayPal, loadingPayPal, order, paypal, paypalDispatch])
 
+  // updates the order info to payed etc
+  // ACTIONS HAS A BUNCH OF METHODS THAT WE CAN USE
+  function onApprove(data, actions) {
+    // make async as we call pay order that ret a promise
+    // ACTIONS.ORDER TRIGGERS PAYPAL
+    return actions.order.capture().then(async function (details) {
+      try {
+        console.log('DETAILS --->', details)
+        // from the usePayOrderMutation we call anything
+        await payOrder({ orderId, details })
+        // gets most upto dat data - redux
+        refetch()
+        toast.success('Order is paid')
+      } catch (err) {
+        toast.error(err?.data?.message || err.error)
+      }
+    })
+  }
+
+  function onError(err) {
+    toast.error(err.message)
+  }
+  /**
+   * IN THE DOCS THE CODE IS ALL WRITTEN IN-LINE
+   * IN THE CODE HERE WE WRITE THE FUNCTIONS IN THE
+   * CALLBACK FUNCTION
+   */
+
+  function createOrder(data, actions) {
+    return actions.order
+      .create({
+        purchase_units: [
+          {
+            amount: { value: order.totalPrice },
+          },
+        ],
+      })
+      .then((orderID) => {
+        console.log('ORDER ID ---> ', orderID)
+        return orderID
+      })
+  }
+
+  // DOES NOT TRIGGER PAYPAL
+  // WE JUST UPDATE THE PAY ORDER
+  // AS NOT GETTING DETAILS FROM PAYPAL
+  // WE SET DETAILS TO OBJ AND PAYER EMPY OBJECT
+  async function onApproveTest() {
+    // PAYER IS AN EMPTY OBJ AS WE DO NOT HAVE THE PAYER DETAILS AS A TEST FUNCTION
+    await payOrder({ orderId, details: { payer: {} } })
+    refetch()
+
+    toast.success('Order is paid')
+  }
+  console.log(order)
   return isLoading ? (
     <Loader />
   ) : error ? (
@@ -171,6 +227,28 @@ const OrderScreen = () => {
                 </Row>
               </ListGroup.Item>
               {/* PAY ORDER PLACEHOLDER */}
+              {!order.isPaid && (
+                <ListGroup.Item>
+                  {loadingPay && <Loader />}
+
+                  {isPending ? (
+                    <Loader />
+                  ) : (
+                    <div>
+                      {/* <Button style={{ marginBottom: '10px' }} onClick={onApproveTest}>
+                        Test Pay Order
+                      </Button> */}
+                      <div>
+                        <PayPalButtons
+                          createOrder={createOrder}
+                          onApprove={onApprove}
+                          onError={onError}
+                        ></PayPalButtons>
+                      </div>
+                    </div>
+                  )}
+                </ListGroup.Item>
+              )}
               {/* {MARK AS DELIVERED PLACEHOLDER} */}
             </ListGroup>
           </Card>

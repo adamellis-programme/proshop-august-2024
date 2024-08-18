@@ -40,6 +40,7 @@ const PlaceOrderScreen = () => {
       }).unwrap()
 
       dispatch(clearCartItems())
+      // navigate to paypal options
       navigate(`/order/${res._id}`)
     } catch (err) {
       toast.error(err)
