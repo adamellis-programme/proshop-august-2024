@@ -10,12 +10,13 @@ import {
   useGetOrderDetailsQuery,
   usePayOrderMutation,
   useGetPaypalClientIdQuery,
+  useDeliverOrderMutation,
 } from '../slices/ordersApiSlice'
 const OrderScreen = () => {
   const { id: orderId } = useParams()
 
   const { data: order, refetch, isLoading, error } = useGetOrderDetailsQuery(orderId)
-
+  const [deliverOrder, { isLoading: loadingDeliver }] = useDeliverOrderMutation()
   /**
    * from slice name payOrder what we like
    * isLoading re named as we have one
@@ -124,6 +125,17 @@ const OrderScreen = () => {
     toast.success('Order is paid')
   }
   console.log(order)
+
+  const deliverOrderHandler = async () => {
+    try {
+      await deliverOrder(orderId)
+      toast.success('Order Delivered')
+      refetch()
+    } catch (err) {
+      toast.error(err.data.message || err.message)
+    }
+  }
+
   return isLoading ? (
     <Loader />
   ) : error ? (
@@ -250,6 +262,21 @@ const OrderScreen = () => {
                 </ListGroup.Item>
               )}
               {/* {MARK AS DELIVERED PLACEHOLDER} */}
+
+              {loadingDeliver && <Loader />}
+
+              {/* if all this is true we can add the list item with the button */}
+              {userInfo && userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+                <ListGroup.Item>
+                  <Button
+                    type="button"
+                    className="btn btn-block"
+                    onClick={deliverOrderHandler}
+                  >
+                    Mark As Delivered
+                  </Button>
+                </ListGroup.Item>
+              )}
             </ListGroup>
           </Card>
         </Col>
