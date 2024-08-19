@@ -1,3 +1,8 @@
+work flow 
+   - add backend route with the controller 
+      -  go to frontend deal with the state (MUTATIONS / QUERIES)
+          -  go to screen and implement the actions
+
 1 -- create frontend / backend folder structure 
 2 -- get setup for git 
         -- when we use create react app it creates a git repo folder 
@@ -240,8 +245,21 @@ Hope that answers it for you.
                 Under the hood Multer is using path.resolve to create the file path and a backslash is the file delimitter on Windows.
                 So resolving the system path will use the system delimitter i.e. the backslash on Windows.
                 So in production you will deploy to a Linux server and uploads will use the forward slash in the path.
+
+
+22--  DELETE PRODUCT
+
+            -- deltete controller 
+                -- delete route
+                    -- add delete builder mutation to productSliceApi.js
+
+work flow 
+   - add backend route with the controller 
+      -  go to frontend deal with the state 
+          -  go to screen and implement the actions
+
 21--
-21--
+
 21--
 
 

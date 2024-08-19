@@ -8,6 +8,7 @@ import {
   useGetProductsQuery,
   useGetProductDetailsQuery,
   useCreateProductMutation,
+  useDeleteProductMutation,
 } from '../../slices/productsApiSlice'
 
 // HAVE TO USE LOADING AS IT SHOWS UNDEFINED LOADS OF TIMES
@@ -15,17 +16,28 @@ import {
 const ProductListScreen = () => {
   const { data: products, isLoading, error, refetch } = useGetProductsQuery()
 
-  const deleteHandler = (id) => {
-    console.log('delete', id)
+  const deleteHandler = async (id) => {
+    if (window.confirm('Are you sure')) {
+      try {
+        await deleteProduct(id)
+        refetch()
+      } catch (err) {
+        toast.error(err?.data?.message || err.error)
+      }
+    }
   }
+
   // wold normally call createProduct but this is being auto created on the backend
   const [createProduct, { isLoading: loadingCreate }] = useCreateProductMutation()
+  const [deleteProduct, { isLoading: loadingDelete }] = useDeleteProductMutation()
 
   const createProductHandler = async () => {
     if (window.confirm('Are you sure you want to create a new product?')) {
       try {
         // we do not pass anything in as we are creating on the backend
         await createProduct().unwrap() // NOTE: here we need to unwrap the Promise to catch any rejection in our catch block
+        // useing refetch to manually refetch the data
+        toast.success('product deleted')
         refetch()
       } catch (err) {
         console.log(err)
@@ -46,7 +58,10 @@ const ProductListScreen = () => {
           </Button>
         </Col>
       </Row>
+
       {loadingCreate && <Loader />}
+      {loadingDelete && <Loader />}
+
       {isLoading ? (
         <Loader />
       ) : error ? (
