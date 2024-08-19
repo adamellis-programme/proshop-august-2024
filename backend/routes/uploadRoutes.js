@@ -36,10 +36,12 @@ const storage = multer.diskStorage({
 function checkFileType(file, cb) {
   console.log(file)
   const filetypes = /jpg|jpeg|png/ // regex
+
+  // checks regex
   const extname = filetypes.test(path.extname(file.originalname).toLowerCase())
   const mimetype = filetypes.test(file.mimetype)
 
-  // if passes the test we return the cb with true
+  // if passes the tests we return the cb with true
   if (extname && mimetype) {
     return cb(null, true)
   } else {
@@ -57,7 +59,7 @@ const upload = multer({
 // file.fieldname in uniqueSuffix is what ever we pute here 'image'
 // actual upload is handled by upload.single
 router.post('/', upload.single('image'), (req, res) => {
-    // after img upload we just send back this info
+  // after img upload we just send back this info
   res.send({
     message: 'Image uploaded successfully',
     image: `/${req.file.path}`,

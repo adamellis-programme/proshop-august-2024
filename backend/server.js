@@ -44,9 +44,29 @@ app.get('/api/config/paypal', (req, res) => {
 })
 
 // make uploads folder a static folder
+// For example, if your project directory is /home/user/project, this line will resolve the uploads directory as /home/user/project/uploads.
 const __dirname = path.resolve() // set __dirname to current directory
+
 // make static by express.static and passing in a location
+// This tells your Express app to use the upload router for any requests to /api/upload.
+// path.resolve() = ensuring that __dirname is set to the current working directory from which the Node.js process is running.
+
+console.log(__dirname, '/uploads') // =  /Users/adamellis/Desktop/pro shop august 2024/proshop august 2024 copy 4 /uploads
+// this emsures that the path is root / uploads
+
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
+
+// express.static is a built-in middleware
+// function in Express. It is used to serve static
+// files (like images, CSS files, JavaScript files, etc.)
+// directly from a specified directory.
+
+// Static files are files that the server
+// does not need to process or modify—files
+// that are served directly as they are stored.
+
+// path.join is used to create a normalized path by joining the current directory (__dirname) with the /uploads directory. This ensures that the server correctly resolves the path regardless of the operating system.
+// For example, if your project directory is /home/user/project, this line will resolve the uploads directory as /home/user/project/uploads.
 
 // make sure under all routes
 app.use(notFound)
