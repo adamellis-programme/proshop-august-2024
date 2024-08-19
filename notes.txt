@@ -264,7 +264,11 @@ work flow
       -  go to frontend deal with the state 
           -  go to screen and implement the actions
 
-21--
+23-- UPATE USER     
+
+        -- two slices of code 
+            -- QUERY to get the user    
+            -- MUTATION to update the user
 
 21--
 

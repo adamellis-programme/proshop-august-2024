@@ -51,6 +51,25 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         method: 'DELETE',
       }),
     }),
+
+    // can detstructure the id as normal here
+    //-- update the user
+    updateUser: builder.mutation({
+      query: (data) => ({
+        url: `${USERS_URL}/${data.userId}`,
+        method: 'PUT',
+        body: data,
+      }),
+      invalidatesTags: ['User'],
+    }),
+
+    // -- get user to update
+    getUserDetails: builder.query({
+      query: (id) => ({
+        url: `${USERS_URL}/${id}`,
+      }),
+      keepUnusedDataFor: 5,
+    }),
   }),
 })
 
@@ -61,4 +80,6 @@ export const {
   useProfileMutation, // used in profiles screen
   useGetUsersQuery,
   useDeleteUserMutation,
+  useGetUserDetailsQuery,
+  useUpdateUserMutation,
 } = usersApiSlice
