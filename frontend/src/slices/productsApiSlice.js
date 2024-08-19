@@ -55,6 +55,16 @@ export const productsApiSlice = apiSlice.injectEndpoints({
         method: 'DELETE',
       }),
     }),
+    //-- create review (no query as reviews are included in the data )
+    createReview: builder.mutation({
+      query: (data) => ({
+        url: `${PRODUCTS_URL}/${data.productId}/reviews`,
+        method: 'POST',
+        body: data,
+      }),
+      // we provided the tag on get data and we tell it not to chache here
+      invalidatesTags: ['Product'],
+    }),
   }),
 })
 
@@ -73,6 +83,7 @@ export const {
   useUpdateProductMutation,
   useUploadProductImageMutation,
   useDeleteProductMutation,
+  useCreateReviewMutation,
 } = productsApiSlice
 /**
  * no fetch request or axios to make req

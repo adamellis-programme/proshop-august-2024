@@ -92,13 +92,32 @@ const createProductReview = asyncHandler(async (req, res) => {
   const { rating, comment } = req.body
 
   const product = await Product.findById(req.params.id)
+  // console.log(product.reviews)
+  // console.log(req.user)
 
-  // make sure
+  /**
+   * find the first that matches
+   * loop through the reviews array and find first one
+   *
+   * r.user.toString() = name of the reviewer on each review object
+   *
+   * req.user._id.toString() = is the logged in user
+   *
+   * if these two match then run true
+   *
+   *        -- if reviewerId matches logged in
+   *        -- id this means the loggedin user
+   *        -- has reviewed this product before
+   *
+   *
+   */
   if (product) {
     const alreadyReviewed = product.reviews.find(
       // match it to a loggedin users id as a string
       (r) => r.user.toString() === req.user._id.toString()
     )
+
+    console.log('ALREADY REVIEWED', alreadyReviewed)
 
     if (alreadyReviewed) {
       res.status(400)
@@ -118,7 +137,7 @@ const createProductReview = asyncHandler(async (req, res) => {
     // after we push on new review
     product.numReviews = product.reviews.length
 
-    // get the overall rating 
+    // get the overall rating
     product.rating =
       product.reviews.reduce((acc, item) => item.rating + acc, 0) / product.reviews.length
 
