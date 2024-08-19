@@ -2,6 +2,12 @@ work flow
    - add backend route with the controller 
       -  go to frontend deal with the state (MUTATIONS / QUERIES)
           -  go to screen and implement the actions
+         *******************
+        the slice returns the
+         get/ put / post data
+         back through the 
+         useGetUsersQuery();
+         *******************
 
 1 -- create frontend / backend folder structure 
 2 -- get setup for git 

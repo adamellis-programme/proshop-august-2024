@@ -35,6 +35,22 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+    // --
+    getUsers: builder.query({
+      // do not need methos as get is the default
+      query: () => ({
+        url: USERS_URL,
+      }),
+      providesTags: ['User'], // need this so we do not need to re load on delete
+      keepUnusedDataFor: 5,
+    }),
+
+    deleteUser: builder.mutation({
+      query: (userId) => ({
+        url: `${USERS_URL}/${userId}`,
+        method: 'DELETE',
+      }),
+    }),
   }),
 })
 
@@ -43,4 +59,6 @@ export const {
   useLogoutMutation,
   useRegisterMutation,
   useProfileMutation, // used in profiles screen
+  useGetUsersQuery,
+  useDeleteUserMutation,
 } = usersApiSlice
