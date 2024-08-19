@@ -226,7 +226,10 @@ Hope that answers it for you.
 21-- UPLOAD IMAGE WITH MULTER
     -- this is the go to for js and uploading images 
     -- we can use amazon buckets but here we are using the server
-    -- 
+    
+    -- create upload routes.js 
+        - install, multer, path, express etc
+        - 
 21--
 21--
 21--

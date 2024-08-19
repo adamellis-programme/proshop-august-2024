@@ -1,3 +1,4 @@
+import path from 'path' // at top as built in node modules as convention
 import express from 'express'
 import dotenv from 'dotenv'
 dotenv.config() // call above where we uer the variables
@@ -7,7 +8,7 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 import productRoutes from './routes/productRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import orderRoutes from './routes/orderRoutes.js'
-
+import uploadRoutes from './routes/uploadRoutes.js'
 import cookieParser from 'cookie-parser'
 
 const app = express()
@@ -29,7 +30,7 @@ app.get('/', (req, res) => {
 app.use('/api/products', productRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/orders', orderRoutes)
-
+app.use('/api/upload', uploadRoutes)
 
 /**
  *
@@ -41,6 +42,11 @@ app.use('/api/orders', orderRoutes)
 app.get('/api/config/paypal', (req, res) => {
   res.send({ clientId: process.env.PAYPAL_CLIENT_ID })
 })
+
+// make uploads folder a static folder
+const __dirname = path.resolve() // set __dirname to current directory
+// make static by express.static and passing in a location
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
 // make sure under all routes
 app.use(notFound)
