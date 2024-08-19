@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
 
 // the user here will not be the same as the product owner user
+// LIKE A SUB COLLECTION
 const reviewSchema = mongoose.Schema(
   {
     name: { type: String, required: true },
