@@ -140,7 +140,7 @@ const OrderScreen = () => {
     <Loader />
   ) : error ? (
     // WILL SHOW THE ERROR SENT FROM THE BACKEND THROW NEW ERROR
-    <Message variant="danger">{error}</Message>
+    <Message variant='danger'>{error?.data?.message || error.error}</Message>
   ) : (
     <>
       <h1>Order {order._id}</h1>

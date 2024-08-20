@@ -6,11 +6,19 @@
  *   - user signs out but fetch the next users cart on their
  *   - signin
  */
+
 export const addDecimals = (num) => {
   return (Math.round(num * 100) / 100).toFixed(2)
 }
 
 // Update the prices and save to storage
+/**
+ *
+ * KEEP ALL STATE HERE IN ONE FILE
+ * SO WE DO NOT HAVE TO KEEP WRITTING
+ * OUT THE SAME CODE OVER AGAIN
+ *
+ */
 export const updateCart = (state) => {
   // we are passimg state so we can use it in here
   // Calculate the items price

@@ -33,38 +33,43 @@ const storage = multer.diskStorage({
 
 // all properties are avalible on the file object
 // test just tests to see if it matched the regular expression
-function checkFileType(file, cb) {
-  console.log(file)
-  const filetypes = /jpg|jpeg|png/ // regex
-
-  // checks regex
+function fileFilter(req, file, cb) {
+  // checks the file and mime types
+  const filetypes = /jpe?g|png|webp/
+  const mimetypes = /image\/jpe?g|image\/png|image\/webp/
   const extname = filetypes.test(path.extname(file.originalname).toLowerCase())
-  const mimetype = filetypes.test(file.mimetype)
+  const mimetype = mimetypes.test(file.mimetype)
 
-  // if passes the tests we return the cb with true
   if (extname && mimetype) {
-    return cb(null, true)
+    cb(null, true)
   } else {
-    // here we return the firsh argument which is an error
-    cb({ message: 'Images only!' })
+    cb(new Error('Images only!'), false)
   }
 }
 
-const upload = multer({
-  storage,
-})
+const upload = multer({ storage, fileFilter })
+// sigle method on the upload obj
+const uploadSingleImage = upload.single('image') // middleware
 
 // wr are using single as only allow single file
 // 'image' can be named anything
 // file.fieldname in uniqueSuffix is what ever we pute here 'image'
 // actual upload is handled by upload.single
-router.post('/', upload.single('image'), (req, res) => {
-  // after img upload we just send back this info
-  res.send({
-    message: 'Image uploaded successfully',
-    image: `/${req.file.path}`,
+
+router.post('/', (req, res) => {
+  // passign in uploadSingleImage as a middleware function
+  uploadSingleImage(req, res, function (err) {
+    if (err) {
+      res.status(400).send({ message: err.message })
+    }
+
+    res.status(200).send({
+      message: 'Image uploaded successfully',
+      image: `/${req.file.path}`,
+    })
   })
 })
+
 export default router
 
 // bring into the server.js

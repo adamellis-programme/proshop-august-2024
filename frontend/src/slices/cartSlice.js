@@ -61,6 +61,14 @@ const cartSlice = createSlice({
       state.cartItems = []
       return updateCart(state)
     },
+    resetCart: (state) => {
+      // this or set each state individually
+      // Return the initial state object as the new state
+      // have to spread across
+      // we return so we can update everywhere
+
+      return updateCart({ ...initialState })
+    },
   },
 })
 
@@ -70,6 +78,22 @@ export const {
   saveShippingAddress,
   savePaymentMethod,
   clearCartItems,
+  resetCart,
 } = cartSlice.actions
 // bring into our store file
 export default cartSlice.reducer
+
+/**
+ * 
+ * or this works 
+ * 
+ * resetCart: (state) => {
+  // Reset each property to its corresponding initial state value
+  state.cartItems = initialState.cartItems
+  state.shippingAddress = initialState.shippingAddress
+  state.paymentMethod = initialState.paymentMethod
+
+  // Update the state using the updateCart function
+  return updateCart(state) // This will recalculate prices and save to localStorage
+},
+ */

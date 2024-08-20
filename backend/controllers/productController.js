@@ -26,7 +26,7 @@ const createProduct = asyncHandler(async (req, res) => {
 // @route   GET /api/products
 // @access  Public
 const getProducts = asyncHandler(async (req, res) => {
-  const pageSize = 1
+  const pageSize = 3
   // set to the page number that is in the url (req.query) to get what ever we called it in thhe query params
   // cast it to a number
   const page = Number(req.query.pageNumber) || 1
