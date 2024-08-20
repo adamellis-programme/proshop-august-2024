@@ -13,6 +13,8 @@ import HomeScreen from './screens/HomeScreen'
 import ProductScreen from './screens/ProductScreen'
 import RegisterScreen from './screens/registerScreen'
 
+import { HelmetProvider } from 'react-helmet-async'
+
 // import 'bootstrap/dist/css/bootstrap.min.css'
 import './assets/styles/bootstrap.custom.css'
 import './assets/styles/index.css'
@@ -76,12 +78,14 @@ const router = createBrowserRouter(
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <PayPalScriptProvider deferLoading={true}>
-        {/* place app inside this paypal provider */}
-        <RouterProvider router={router} />
-        {/* <App /> */}
-      </PayPalScriptProvider>
-    </Provider>
+    <HelmetProvider>
+      <Provider store={store}>
+        <PayPalScriptProvider deferLoading={true}>
+          {/* place app inside this paypal provider */}
+          <RouterProvider router={router} />
+          {/* <App /> */}
+        </PayPalScriptProvider>
+      </Provider>
+    </HelmetProvider>
   </React.StrictMode>
 )

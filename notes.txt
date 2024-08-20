@@ -307,6 +307,12 @@ work flow
         -- create a query in the frontend slice 
 
 
+26 -- DYNAMIC PAGE TITLES 
+        -- We use react HELMET ASYNC IN FRONTED  INSTALL
+        -- wrap the whole app with helmet 
+        
+
+
 
 unwrap():
 This is often used with tools like Redux 

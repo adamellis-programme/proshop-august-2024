@@ -1,37 +1,38 @@
 import { Row, Col } from 'react-bootstrap'
+import { useParams } from 'react-router-dom'
+import { useGetProductsQuery } from '../slices/productsApiSlice'
+import { Link } from 'react-router-dom'
 import Product from '../components/Product'
 import Loader from '../components/Loader'
-import { useParams, Link } from 'react-router-dom'
-import Paginate from '../components/Paginate'
-
-import { useGetProductsQuery } from '../slices/productsApiSlice'
 import Message from '../components/Message'
-
+import Paginate from '../components/Paginate'
 import ProductCarousel from '../components/ProductCarousel'
-// one ? rest :
+import Meta from '../components/Meta'
+
 const HomeScreen = () => {
   const { pageNumber, keyword } = useParams()
-  // calling data as we made the return an object with
-  // products, page, pageSize
-  const { data, isLoading, error } = useGetProductsQuery({ pageNumber, keyword }) // add in params
+
+  const { data, isLoading, error } = useGetProductsQuery({
+    keyword,
+    pageNumber,
+  })
+
   return (
     <>
-    {/* only show the carousel if there is no search term */}
       {!keyword ? (
         <ProductCarousel />
       ) : (
-        <Link to="/" className="btn btn-light">
+        <Link to="/" className="btn btn-light mb-4">
           Go Back
         </Link>
       )}
-      <ProductCarousel />
-
       {isLoading ? (
         <Loader />
       ) : error ? (
         <Message variant="danger">{error?.data?.message || error.error}</Message>
       ) : (
         <>
+          <Meta />
           <h1>Latest Products</h1>
           <Row>
             {data.products.map((product) => (
@@ -40,8 +41,6 @@ const HomeScreen = () => {
               </Col>
             ))}
           </Row>
-          {/* we changed  the data to return an pbject */}
-          {/* keyword comes in from the url */}
           <Paginate
             pages={data.pages}
             page={data.page}

@@ -7,8 +7,9 @@ import { useGetTopProductsQuery } from '../slices/productsApiSlice'
 const ProductCarousel = () => {
   const { data: products, isLoading, error } = useGetTopProductsQuery()
 
+  // <Loader/> was in place of '' but showing twice as in Home.jsx
   return isLoading ? (
-    <Loader />
+    ''
   ) : error ? (
     <Message variant="danger">{error?.data?.message || error.error}</Message>
   ) : (
