@@ -6,6 +6,8 @@ import Paginate from '../components/Paginate'
 
 import { useGetProductsQuery } from '../slices/productsApiSlice'
 import Message from '../components/Message'
+
+import ProductCarousel from '../components/ProductCarousel'
 // one ? rest :
 const HomeScreen = () => {
   const { pageNumber, keyword } = useParams()
@@ -14,11 +16,16 @@ const HomeScreen = () => {
   const { data, isLoading, error } = useGetProductsQuery({ pageNumber, keyword }) // add in params
   return (
     <>
-      {keyword && (
-        <Link to="/" className="btn btn-light mb-4">
-          Go back
+    {/* only show the carousel if there is no search term */}
+      {!keyword ? (
+        <ProductCarousel />
+      ) : (
+        <Link to="/" className="btn btn-light">
+          Go Back
         </Link>
       )}
+      <ProductCarousel />
+
       {isLoading ? (
         <Loader />
       ) : error ? (

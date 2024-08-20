@@ -297,6 +297,14 @@ work flow
             if we do not do this paginaiton will not work on filterd results
             
 
+    -- CAROUSEL
+        -- create new route in the backend so 
+           we get the top 3 products 
+           sort by rating 
+            copy fetch aproduct id
+            got to routes and set up a new route to execute this file
+
+        -- create a query in the frontend slice 
 
 
 

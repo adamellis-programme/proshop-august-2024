@@ -66,6 +66,11 @@ export const productsApiSlice = apiSlice.injectEndpoints({
       // we provided the tag on get data and we tell it not to chache here
       invalidatesTags: ['Product'],
     }),
+    //-- get top 3 products by rating
+    getTopProducts: builder.query({
+      query: () => `${PRODUCTS_URL}/top`,
+      keepUnusedDataFor: 5,
+    }),
   }),
 })
 
@@ -85,6 +90,7 @@ export const {
   useUploadProductImageMutation,
   useDeleteProductMutation,
   useCreateReviewMutation,
+  useGetTopProductsQuery,
 } = productsApiSlice
 /**
  * no fetch request or axios to make req
