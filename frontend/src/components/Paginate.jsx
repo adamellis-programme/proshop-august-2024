@@ -28,10 +28,12 @@ const Paginate = ({ pages, page, isAdmin = false, keyword = '' }) => {
              *
              * keyword ? ... : ...: The keyword variable likely represents a search term entered by the user.
              * It’s used to determine if the user is navigating through a search results page.
+             * The last condition will be evaluated if isAdmin is passed as a prop of true.
              *
              * If keyword use keyword and pagination
              * if no key word use just pagination
-             * else anything else defaylt to admin
+             * else if isAdmin use admin route
+             *
              */
 
             to={
@@ -56,3 +58,16 @@ const Paginate = ({ pages, page, isAdmin = false, keyword = '' }) => {
 }
 
 export default Paginate
+
+// same as saying this
+
+// const getPageLink = () => {
+//   if (!isAdmin) {
+//     return keyword ? `/search/${keyword}/page/${x + 1}` : `/page/${x + 1}`
+//   }
+//   return `/admin/productlist/${x + 1}`
+// }
+
+// Then use that as the prop:
+
+// to={getPageLink()}

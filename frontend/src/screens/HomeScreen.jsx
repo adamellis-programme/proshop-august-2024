@@ -1,7 +1,7 @@
 import { Row, Col } from 'react-bootstrap'
 import Product from '../components/Product'
 import Loader from '../components/Loader'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import Paginate from '../components/Paginate'
 
 import { useGetProductsQuery } from '../slices/productsApiSlice'
@@ -14,6 +14,11 @@ const HomeScreen = () => {
   const { data, isLoading, error } = useGetProductsQuery({ pageNumber, keyword }) // add in params
   return (
     <>
+      {keyword && (
+        <Link to="/" className="btn btn-light mb-4">
+          Go back
+        </Link>
+      )}
       {isLoading ? (
         <Loader />
       ) : error ? (
