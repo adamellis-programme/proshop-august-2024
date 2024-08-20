@@ -2,7 +2,8 @@ import { Row, Col } from 'react-bootstrap'
 import Product from '../components/Product'
 import Loader from '../components/Loader'
 import { useParams } from 'react-router-dom'
-// overide mongo id
+import Paginate from '../components/Paginate';
+
 import { useGetProductsQuery } from '../slices/productsApiSlice'
 import Message from '../components/Message'
 // one ? rest :
@@ -27,6 +28,8 @@ const HomeScreen = () => {
               </Col>
             ))}
           </Row>
+          {/* we changed  the data to return an pbject */}
+          <Paginate pages={data.pages} page={data.page} />
         </>
       )}
     </>
