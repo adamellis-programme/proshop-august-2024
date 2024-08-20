@@ -26,22 +26,40 @@ const createProduct = asyncHandler(async (req, res) => {
 // @route   GET /api/products
 // @access  Public
 const getProducts = asyncHandler(async (req, res) => {
-  const pageSize = 2
+  const pageSize = 1
   // set to the page number that is in the url (req.query) to get what ever we called it in thhe query params
   // cast it to a number
   const page = Number(req.query.pageNumber) || 1
 
+  // ret obj
+  // we use regex as when wwe type phone it gives us all iphones 10 etc
+  // options 'i' makes case insenitive
+  // req.query comes in through params req obj
+  const keyword = req.query.keyword
+    ? {
+        name: {
+          $regex: req.query.keyword,
+          $options: 'i',
+        },
+      }
+    : // no keyword
+      {}
+
   // count documents is a mongoose method
   // gets total number of products
-  const count = await Product.countDocuments()
+  // still limit the count
+  const count = await Product.countDocuments({ ...keyword })
 
   // skip works if on 3 page it skips all pages before it
-  const products = await Product.find({})
+  // spread across ...keyword do the same and find only products with this keyword
+  // IF THERE IS A KEYWORD
+  const products = await Product.find({ ...keyword })
     .limit(pageSize)
     .skip(pageSize * (page - 1))
 
   // return an object
   // first round up then divide count by the page size
+  // pages is 100 / 10 gives us 10 pages
   res.json({ products, page, pages: Math.ceil(count / pageSize) })
 })
 

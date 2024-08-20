@@ -2,16 +2,16 @@ import { Row, Col } from 'react-bootstrap'
 import Product from '../components/Product'
 import Loader from '../components/Loader'
 import { useParams } from 'react-router-dom'
-import Paginate from '../components/Paginate';
+import Paginate from '../components/Paginate'
 
 import { useGetProductsQuery } from '../slices/productsApiSlice'
 import Message from '../components/Message'
 // one ? rest :
 const HomeScreen = () => {
-  const { pageNumber } = useParams()
+  const { pageNumber, keyword } = useParams()
   // calling data as we made the return an object with
   // products, page, pageSize
-  const { data, isLoading, error } = useGetProductsQuery({ pageNumber }) // add in params
+  const { data, isLoading, error } = useGetProductsQuery({ pageNumber, keyword }) // add in params
   return (
     <>
       {isLoading ? (
@@ -29,7 +29,12 @@ const HomeScreen = () => {
             ))}
           </Row>
           {/* we changed  the data to return an pbject */}
-          <Paginate pages={data.pages} page={data.page} />
+          {/* keyword comes in from the url */}
+          <Paginate
+            pages={data.pages}
+            page={data.page}
+            keyword={keyword ? keyword : ''}
+          />
         </>
       )}
     </>

@@ -276,7 +276,28 @@ work flow
             - products
             - page that we are on 
             - total number of pages 
-alter frontend to take into account the object 
+        alter frontend to take into account the object 
+
+25 SEARCH BAR
+
+            -- keyword wuery goes in  params 
+            -- in productsApi slice pass in keyword
+               next to params
+
+            -- go to home screen in the params check for keyword
+            -- go to index.js and update the routes
+            
+            -- need to add route for search AND page number 
+                as well as the individual routes
+                as we need pagination with our filtered results too
+            
+            NOW we can test wit / serach / phone 
+
+        -- Add it to the pagination
+            if we do not do this paginaiton will not work on filterd results
+            
+
+
 
 
 unwrap():

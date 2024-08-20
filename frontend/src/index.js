@@ -34,14 +34,18 @@ import ProductListScreen from './screens/admin/ProductListScreen'
 import ProductEditScreen from './screens/admin/ProductEditScreen'
 import UserListScreen from './screens/admin/userListScreen'
 import UserEditScreen from './screens/admin/UserEditScreen'
+// : is for place holders
 const router = createBrowserRouter(
   createRoutesFromElements(
     // App gets passed here
     <Route path="/" element={<App />}>
       <Route index={true} path="/" element={<HomeScreen />} />
-      {/*  route for pagination only  */}
+      {/*  route for pagination and search AND BOTH only  */}
       <Route path="/page/:pageNumber" element={<HomeScreen />} />
 
+      <Route path="/search/:keyword" element={<HomeScreen />} />
+      <Route path="/search/:keyword/page/:pageNumber" element={<HomeScreen />} />
+      {/*  */}
       <Route path="/product/:id" element={<ProductScreen />} />
       <Route path="/cart" element={<CartScreen />} />
       <Route path="/login" element={<LoginScreen />} />

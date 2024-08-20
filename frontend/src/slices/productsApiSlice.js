@@ -3,12 +3,12 @@ import { apiSlice } from './apiSlice'
 
 export const productsApiSlice = apiSlice.injectEndpoints({
   // now we have our page number param
-  // pageNumber needs to be passed from the frontend 
+  // pageNumber needs to be passed from the frontend
   endpoints: (builder) => ({
     getProducts: builder.query({
-      query: ({ pageNumber }) => ({
+      query: ({ keyword, pageNumber }) => ({
         url: PRODUCTS_URL,
-        params: { pageNumber },
+        params: { keyword, pageNumber },
       }),
       keepUnusedDataFor: 5,
     }),

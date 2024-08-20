@@ -1,7 +1,8 @@
 import { Pagination } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
-const Paginate = ({ pages, page, isAdmin = false }) => {
+const Paginate = ({ pages, page, isAdmin = false, keyword = '' }) => {
+  console.log(pages)
   return (
     // if only one page do not show
     // map through the pages - have an array, pass in pages starts at 0
@@ -12,7 +13,34 @@ const Paginate = ({ pages, page, isAdmin = false }) => {
             key={x + 1}
             // + 1 = 0 based so start at 1
             // link depending on if admin or not
-            to={!isAdmin ? `/page/${x + 1}` : `/admin/productlist/${x + 1}`}
+            /**
+             * NEED THIS AS IT CHANGES THE PARAMS
+             * AND THEREFOR SHOWS DIFFERENT DATA
+             * ON THE HOME SCREEN PAGE
+             *
+             * IF NOT ADMIN GO TO  `/admin/productlist/${x + 1}`
+             *
+             * The ternary operator (? :) is used to decide between two different URL formats based on whether the user is an admin or not.
+             *
+             * if not an admin (!isAdmin): The URL path is determined based on the presence of a keyword.
+             *
+             * if an admin (isAdmin): The URL path is directed to an admin-specific page.
+             *
+             * keyword ? ... : ...: The keyword variable likely represents a search term entered by the user.
+             * It’s used to determine if the user is navigating through a search results page.
+             *
+             * If keyword use keyword and pagination
+             * if no key word use just pagination
+             * else anything else defaylt to admin
+             */
+
+            to={
+              !isAdmin
+                ? keyword
+                  ? `/search/${keyword}/page/${x + 1}`
+                  : `/page/${x + 1}`
+                : `/admin/productlist/${x + 1}`
+            }
           >
             {/* page pag item
                 if x + 1 === page this will
