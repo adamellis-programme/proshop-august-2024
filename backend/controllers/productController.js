@@ -26,8 +26,23 @@ const createProduct = asyncHandler(async (req, res) => {
 // @route   GET /api/products
 // @access  Public
 const getProducts = asyncHandler(async (req, res) => {
+  const pageSize = 2
+  // set to the page number that is in the url (req.query) to get what ever we called it in thhe query params
+  // cast it to a number
+  const page = Number(req.query.pageNumber) || 1
+
+  // count documents is a mongoose method
+  // gets total number of products
+  const count = await Product.countDocuments()
+
+  // skip works if on 3 page it skips all pages before it
   const products = await Product.find({})
-  res.json(products)
+    .limit(pageSize)
+    .skip(pageSize * (page - 1))
+
+  // return an object
+  // first round up then divide count by the page size
+  res.json({ products, page, pages: Math.ceil(count / pageSize) })
 })
 
 // @desc    Fetch single product
@@ -108,6 +123,17 @@ const createProductReview = asyncHandler(async (req, res) => {
    *        -- if reviewerId matches logged in
    *        -- id this means the loggedin user
    *        -- has reviewed this product before
+   *
+   *    if all reviews were separate records in the reviews collection
+   *    then we would check if productReviews (look In $in ) .includes(user._id)
+   *    look in the reviewIds array and see if user._id is in that array
+   *
+   *    reviewIds: ['id1, id2, id3, id4, ']
+   *    when a review is deleted we loop through and
+   *    remove the userId
+   *
+   *    ($in like the next property project)
+   *    next properties
    *
    *
    */

@@ -1,12 +1,16 @@
 import { Row, Col } from 'react-bootstrap'
 import Product from '../components/Product'
 import Loader from '../components/Loader'
+import { useParams } from 'react-router-dom'
 // overide mongo id
 import { useGetProductsQuery } from '../slices/productsApiSlice'
 import Message from '../components/Message'
 // one ? rest :
 const HomeScreen = () => {
-  const { data: products, isLoading, error } = useGetProductsQuery()
+  const { pageNumber } = useParams()
+  // calling data as we made the return an object with
+  // products, page, pageSize
+  const { data, isLoading, error } = useGetProductsQuery({ pageNumber }) // add in params
   return (
     <>
       {isLoading ? (
@@ -17,7 +21,7 @@ const HomeScreen = () => {
         <>
           <h1>Latest Products</h1>
           <Row>
-            {products.map((product) => (
+            {data.products.map((product) => (
               <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
                 <Product product={product} />
               </Col>

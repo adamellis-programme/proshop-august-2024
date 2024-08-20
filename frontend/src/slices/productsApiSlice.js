@@ -2,13 +2,14 @@ import { PRODUCTS_URL, UPLOAD_URL } from '../constants'
 import { apiSlice } from './apiSlice'
 
 export const productsApiSlice = apiSlice.injectEndpoints({
+  // now we have our page number param
+  // pageNumber needs to be passed from the frontend 
   endpoints: (builder) => ({
     getProducts: builder.query({
-      query: () => ({
+      query: ({ pageNumber }) => ({
         url: PRODUCTS_URL,
+        params: { pageNumber },
       }),
-      // ask where do the tags come from
-      providesTags: ['Product'], // may have to refresh the page if not
       keepUnusedDataFor: 5,
     }),
     // Add this endpoint

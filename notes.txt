@@ -270,7 +270,13 @@ work flow
             -- QUERY to get the user    
             -- MUTATION to update the user
 
-21--
+24-- PAGINATE 
+
+        -- change data so that we get back an object 
+            - products
+            - page that we are on 
+            - total number of pages 
+alter frontend to take into account the object 
 
 
 unwrap():
