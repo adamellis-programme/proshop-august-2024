@@ -79,7 +79,7 @@ const OrderScreen = () => {
       try {
         console.log('DETAILS --->', details)
         // from the usePayOrderMutation we call anything
-        await payOrder({ orderId, details })
+        await payOrder({ orderId, details }).unwrap()
         // gets most upto dat data - redux
         refetch()
         toast.success('Order is paid')
@@ -140,7 +140,7 @@ const OrderScreen = () => {
     <Loader />
   ) : error ? (
     // WILL SHOW THE ERROR SENT FROM THE BACKEND THROW NEW ERROR
-    <Message variant='danger'>{error?.data?.message || error.error}</Message>
+    <Message variant="danger">{error?.data?.message || error.error}</Message>
   ) : (
     <>
       <h1>Order {order._id}</h1>
